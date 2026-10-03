@@ -1830,7 +1830,7 @@
           terhadap konsep jaringan komputer.
         </p>
 
-        <div class="mt-8 flex flex-wrap justify-center gap-3">
+        <!-- <div class="mt-8 flex flex-wrap justify-center gap-3">
           <span
             v-for="tag in quizTags"
             :key="tag"
@@ -1838,7 +1838,9 @@
           >
             {{ tag }}
           </span>
-        </div>
+        </div> -->
+        <!-- QUIZ -->
+        <NetworkQuiz />
       </div>
     </section>
 
@@ -1854,6 +1856,19 @@
 </template>
 
 <script setup>
+import SectionHeader from "../../components/materi/SectionHeader.vue";
+import InfoCard from "../../components/materi/InfoCard.vue";
+import ConceptBox from "../../components/materi/ConceptBox.vue";
+import DeviceCard from "../../components/materi/DeviceCard.vue";
+import NetworkNode from "../../components/materi/NetworkNode.vue";
+import ProtocolCard from "../../components/materi/ProtocolCard.vue";
+import StatCard from "../../components/materi/StatCard.vue";
+import CodeBox from "../../components/materi/CodeBox.vue";
+import BulletItem from "../../components/materi/BulletItem.vue";
+import StepCard from "../../components/materi/StepCard.vue";
+import FlowRow from "../../components/materi/FlowRow.vue";
+import NetworkQuiz from "../../components/materi/quiz/NetworkQuiz.vue";
+
 const tags = [
   "Router",
   "Switch",
@@ -2156,341 +2171,6 @@ const quizTags = [
   "ICMP",
   "Protocol",
 ];
-</script>
-
-<script>
-export default {
-  components: {
-    SectionHeader: {
-      props: {
-        number: String,
-        eyebrow: String,
-        title: String,
-        description: String,
-      },
-
-      template: `
-        <div class="max-w-3xl">
-          <div class="flex items-center gap-3">
-            <span class="font-mono text-sm text-red-400">
-              {{ number }}
-            </span>
-
-            <span class="h-px w-10 bg-red-500/40"></span>
-
-            <span class="text-sm uppercase tracking-[0.2em] text-zinc-500">
-              {{ eyebrow }}
-            </span>
-          </div>
-
-          <h2 class="mt-5 text-4xl font-black leading-tight md:text-5xl">
-            {{ title }}
-          </h2>
-
-          <p class="mt-5 text-lg leading-relaxed text-zinc-500">
-            {{ description }}
-          </p>
-        </div>
-      `,
-    },
-
-    InfoCard: {
-      props: {
-        title: String,
-        icon: String,
-      },
-
-      template: `
-        <article
-          class="rounded-3xl border border-zinc-800 bg-zinc-900/50 p-7 transition hover:-translate-y-1 hover:border-red-500/30"
-        >
-          <div class="flex items-center gap-4">
-            <div
-              class="flex h-12 w-12 items-center justify-center rounded-xl bg-red-500/10 text-2xl"
-            >
-              {{ icon }}
-            </div>
-
-            <h3 class="text-xl font-bold">
-              {{ title }}
-            </h3>
-          </div>
-
-          <div class="mt-6 space-y-4 text-sm leading-relaxed text-zinc-400">
-            <slot />
-          </div>
-        </article>
-      `,
-    },
-
-    ConceptBox: {
-      props: {
-        title: String,
-      },
-
-      template: `
-        <div
-          class="mt-8 rounded-3xl border border-zinc-800 bg-zinc-900/40 p-7"
-        >
-          <h3 class="text-xl font-bold">
-            {{ title }}
-          </h3>
-
-          <div class="mt-5">
-            <slot />
-          </div>
-        </div>
-      `,
-    },
-
-    DeviceCard: {
-      props: {
-        title: String,
-        icon: String,
-        description: String,
-        points: String,
-      },
-
-      computed: {
-        pointList() {
-          return this.points.split(";")
-        },
-      },
-
-      template: `
-        <article
-          class="group rounded-3xl border border-zinc-800 bg-zinc-900/50 p-7 transition hover:-translate-y-1 hover:border-red-500/30"
-        >
-          <div class="flex items-center justify-between">
-            <div
-              class="flex h-14 w-14 items-center justify-center rounded-2xl bg-red-500/10 text-3xl"
-            >
-              {{ icon }}
-            </div>
-
-            <span
-              class="text-xs uppercase tracking-widest text-zinc-600"
-            >
-              Network Device
-            </span>
-          </div>
-
-          <h3
-            class="mt-6 text-2xl font-bold transition group-hover:text-red-400"
-          >
-            {{ title }}
-          </h3>
-
-          <p class="mt-3 text-sm leading-relaxed text-zinc-500">
-            {{ description }}
-          </p>
-
-          <div class="mt-6 space-y-2">
-            <div
-              v-for="point in pointList"
-              :key="point"
-              class="flex items-center gap-2 text-sm text-zinc-400"
-            >
-              <span class="text-red-400">
-                ✓
-              </span>
-
-              {{ point }}
-            </div>
-          </div>
-        </article>
-      `,
-    },
-
-    NetworkNode: {
-      props: {
-        title: String,
-        address: String,
-        icon: String,
-      },
-
-      template: `
-        <div
-          class="rounded-2xl border border-zinc-800 bg-zinc-950 p-5 text-center"
-        >
-          <div class="text-4xl">
-            {{ icon }}
-          </div>
-
-          <h4 class="mt-3 font-bold">
-            {{ title }}
-          </h4>
-
-          <p class="mt-2 font-mono text-xs text-red-400">
-            {{ address }}
-          </p>
-        </div>
-      `,
-    },
-
-    ProtocolCard: {
-      props: {
-        title: String,
-        icon: String,
-        fullName: String,
-        description: String,
-        example: String,
-      },
-
-      template: `
-        <article
-          class="rounded-3xl border border-zinc-800 bg-zinc-900/50 p-7 transition hover:-translate-y-1 hover:border-red-500/30"
-        >
-          <div class="flex items-center justify-between">
-            <div
-              class="flex h-14 w-14 items-center justify-center rounded-2xl bg-red-500/10 text-3xl"
-            >
-              {{ icon }}
-            </div>
-
-            <span class="font-mono text-red-400">
-              {{ title }}
-            </span>
-          </div>
-
-          <h3 class="mt-6 text-xl font-bold">
-            {{ fullName }}
-          </h3>
-
-          <p class="mt-3 text-sm leading-relaxed text-zinc-500">
-            {{ description }}
-          </p>
-
-          <div
-            class="mt-6 rounded-xl border border-zinc-800 bg-zinc-950 p-4"
-          >
-            <p class="text-xs text-zinc-600">
-              Contoh
-            </p>
-
-            <p class="mt-2 font-mono text-sm text-zinc-300">
-              {{ example }}
-            </p>
-          </div>
-        </article>
-      `,
-    },
-
-    StatCard: {
-      props: {
-        value: String,
-        title: String,
-        description: String,
-      },
-
-      template: `
-        <div
-          class="rounded-3xl border border-zinc-800 bg-zinc-900/50 p-6"
-        >
-          <p class="font-mono text-2xl font-bold text-red-400">
-            {{ value }}
-          </p>
-
-          <h3 class="mt-3 font-bold">
-            {{ title }}
-          </h3>
-
-          <p class="mt-2 text-sm leading-relaxed text-zinc-500">
-            {{ description }}
-          </p>
-        </div>
-      `,
-    },
-
-    CodeBox: {
-      template: `
-        <div
-          class="rounded-xl border border-zinc-800 bg-zinc-950 p-5 font-mono text-sm leading-7 text-red-400"
-        >
-          <slot />
-        </div>
-      `,
-    },
-
-    BulletItem: {
-      props: {
-        text: String,
-      },
-
-      template: `
-        <div
-          class="rounded-2xl border border-zinc-800 bg-zinc-950 p-5"
-        >
-          <div class="flex gap-3">
-            <span class="text-red-400">
-              →
-            </span>
-
-            <p class="text-sm leading-relaxed text-zinc-400">
-              {{ text }}
-            </p>
-          </div>
-        </div>
-      `,
-    },
-
-    StepCard: {
-      props: {
-        number: String,
-        title: String,
-        description: String,
-      },
-
-      template: `
-        <div
-          class="rounded-2xl border border-zinc-800 bg-zinc-950 p-6"
-        >
-          <span class="font-mono text-sm text-red-400">
-            {{ number }}
-          </span>
-
-          <h3 class="mt-3 font-bold">
-            {{ title }}
-          </h3>
-
-          <p class="mt-2 text-sm leading-relaxed text-zinc-500">
-            {{ description }}
-          </p>
-        </div>
-      `,
-    },
-
-    FlowRow: {
-      props: {
-        number: String,
-        title: String,
-        description: String,
-      },
-
-      template: `
-        <div
-          class="flex gap-5 rounded-2xl border border-zinc-800 bg-zinc-950 p-5"
-        >
-          <div
-            class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-red-500/10 font-mono text-sm text-red-400"
-          >
-            {{ number }}
-          </div>
-
-          <div>
-            <h3 class="font-bold">
-              {{ title }}
-            </h3>
-
-            <p class="mt-2 text-sm leading-relaxed text-zinc-500">
-              {{ description }}
-            </p>
-          </div>
-        </div>
-      `,
-    },
-  },
-};
 </script>
 
 <style>
