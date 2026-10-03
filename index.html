@@ -10,4 +10,13 @@
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
   </body>
+
+  <script>
+    const redirect = sessionStorage.getItem("redirect");
+
+    if (redirect) {
+      sessionStorage.removeItem("redirect");
+      window.history.replaceState(null, "", redirect);
+    }
+  </script>
 </html>
