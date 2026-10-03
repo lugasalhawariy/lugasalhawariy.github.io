@@ -27,6 +27,7 @@
       <div class="hidden gap-8 text-sm text-zinc-400 md:flex">
         <a href="#about" class="hover:text-white">About</a>
         <a href="#projects" class="hover:text-white">Projects</a>
+        <a href="#knowledge" class="hover:text-white">Article</a>
         <a href="#contact" class="hover:text-white">Contact</a>
       </div>
     </nav>
@@ -160,6 +161,11 @@
     <!-- Projects -->
     <DaftarProject />
 
+    <!-- Knowledge -->
+    <div id="knowledge" class="relative mx-auto max-w-7xl px-6 py-24">
+      <ListKnowledge />
+    </div>
+
     <!-- Contact -->
     <section id="contact" class="relative mx-auto max-w-7xl px-6 py-24">
       <div
@@ -187,6 +193,7 @@
 
 <script setup>
 import DaftarProject from "../components/DaftarProject.vue";
+import ListKnowledge from "../components/ListKnowledge.vue";
 
 const techs = [
   "Vue.js",
